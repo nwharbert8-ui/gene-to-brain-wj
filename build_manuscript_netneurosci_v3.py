@@ -81,12 +81,12 @@ for t in [
  "the between-region similarity of co-expression architecture corresponds to the "
  "between-region functional connectivity, and whether this correspondence is fixed or "
  "depends on the brain's state.",
- "Propofol-induced unconsciousness provides a within-subject manipulation of state that "
+ "Propofol sedation provides a within-subject manipulation of state that "
  "suppresses activity-dependent dynamics while preserving the anatomical substrate. If "
  "molecular architecture is associated with a relatively stable component of connectivity, the "
  "correspondence might be obscured by activity-dependent variation in the awake state "
  "and become more apparent when that variation is reduced. We therefore measured the "
- "correspondence in each individual across the awake, unconscious, and recovery states, "
+ "correspondence in each individual across the awake, sedated, and recovery states, "
  "using an inferential framework appropriate to the non-independence of region pairs.",
 ]: P(t, after=4)
 doc.add_page_break()
@@ -100,12 +100,13 @@ P("Genome-wide expression (GTEx v8) was used to compute, within each of eleven b
   "were retained if at least 30 samples were available.", after=4)
 H("2.2 Functional connectivity data")
 P("Functional connectivity was taken from a publicly available propofol fMRI dataset "
-  "(OpenNeuro ds006623; 24 individuals with usable data in all states). Data were "
+  "(OpenNeuro ds006623). Of 26 individuals, 24 had usable connectivity in all three "
+  "states and were analyzed. Data were "
   "preprocessed with XCP-D (motion regression, without global signal regression) and "
   "parcellated (4S456 atlas). Three states were defined as in the source acquisition: "
-  "awake (resting, pre-propofol), unconscious (post loss of response, propofol "
-  "maintenance, acquired during a mental-imagery task), and recovery (resting, "
-  "post-propofol) (Huang et al., 2026). Behavioral unresponsiveness under sedation "
+  "awake (resting, pre-propofol), the sedated state (post loss of response, propofol "
+  "maintenance, acquired during a mental-imagery task; the unconscious condition in the "
+  "source data), and recovery (resting, post-propofol) (Huang et al., 2026). Behavioral unresponsiveness under sedation "
   "does not by itself establish unconsciousness; this dataset was designed to probe "
   "covert consciousness. Parcel time series were "
   "aggregated to the eleven gene-expression regions, and a Spearman connectivity matrix "
@@ -150,7 +151,9 @@ P("Cell-type composition was addressed by estimating per-region scores for five 
   "individual); the per-subject change in correspondence was regressed on the per-subject "
   "change in framewise displacement, the motion-adjusted state effect being the "
   "intercept. Dependence on the subcortical-versus-cortical block was tested by partial "
-  "Mantel controlling a same-block indicator and by restricting to within-block pairs. "
+  "Mantel controlling a same-block indicator, by restricting to within-block pairs, and "
+  "by comparing cross-type versus within-type pairs after matching their inter-regional "
+  "distance distributions (distance-matched subsampling, 1,000 iterations). "
   "Random seed 42 was used throughout. Analysis code is available (Data and Code "
   "Availability).", after=4)
 doc.add_page_break()
@@ -159,34 +162,34 @@ doc.add_page_break()
 H("3. Results")
 H("3.1 Co-expression architecture corresponds to functional connectivity")
 P("At the group level, co-expression architecture similarity corresponded to functional "
-  "connectivity under unconsciousness (Mantel r = 0.610, p = 0.003) and at recovery "
+  "connectivity in the sedated state (Mantel r = 0.610, p = 0.003) and at recovery "
   "(r = 0.458, p = 0.051), but the awake-state correspondence did not reach significance "
-  "(r = 0.392, p = 0.11). The unconscious correspondence survived control for "
+  "(r = 0.392, p = 0.11). The sedated-state correspondence survived control for "
   "inter-regional distance (partial Spearman rho = 0.297, p = 0.027). Expression-profile "
   "similarity did not correspond to connectivity in any state (awake r = 0.04, p = 0.91).", after=4)
 H("3.2 The correspondence is present in every individual and in all three states")
 P("Computed per individual, with individuals as the independent unit (n = 24), the "
   "correspondence was significant in all three states: awake mean Mantel r = 0.338 (96% "
-  "of individuals positive), unconscious 0.498 (100% positive), recovery 0.358 (100% "
+  "of individuals positive), sedated 0.498 (100% positive), recovery 0.358 (100% "
   "positive); each distribution differed from zero (Wilcoxon p < 0.001). The single "
   "group matrix gave larger point estimates but weaker inference; the per-subject "
   "analysis is the stronger footing and treats individuals, not non-independent region "
   "pairs, as the unit.", after=4)
 H("3.3 The correspondence is reversibly strengthened in the propofol-sedated state")
-P("Within individuals, the correspondence was higher during unconsciousness than awake "
+P("Within individuals, the correspondence was higher in the sedated state than awake "
   "(paired difference 0.160, 95% CI 0.100 to 0.219, p = 6e-05) and than recovery "
   "(difference 0.140, p = 0.0007), while recovery and awake did not differ (difference "
-  "0.019, p = 0.53). The unconscious state was the within-subject maximum in 71% of "
+  "0.019, p = 0.53). The sedated state was the within-subject maximum in 71% of "
   "individuals, and the strengthening reversed on recovery. The correspondence is thus "
-  "modulated by state in a reversible manner. The unconscious condition was acquired "
+  "modulated by state in a reversible manner. The sedated condition was acquired "
   "during an imagery task while the awake and recovery conditions were resting "
-  "(Limitations), so the modulation is attributable to the unconscious state as a whole "
+  "(Limitations), so the modulation is attributable to the sedated state as a whole "
   "rather than to propofol specifically. Per-individual correspondence did not track "
   "propofol effect-site concentration at loss of response in any state.", after=4)
 H("3.4 The correspondence is not explained by cell-type composition or distance")
 P("Cell-type composition was associated with co-expression architecture (Mantel "
   "r = -0.71, p = 0.002) but not with functional connectivity (r = -0.24, p = 0.36). "
-  "The unconscious correspondence survived control for cell-type composition (partial "
+  "The sedated-state correspondence survived control for cell-type composition (partial "
   "r = 0.643, p = 3e-04) and for distance and cell-type composition together (r = 0.428, "
   "p = 0.005). The part of co-expression architecture that corresponds to connectivity "
   "is therefore independent of cell-type composition and of physical distance.", after=4)
@@ -196,10 +199,10 @@ P("Per-region decomposition showed that the correspondence was carried most stro
   "correspondences 0.53 to 0.77 across states), where it was high in every state. The "
   "state-dependent strengthening was concentrated in cortex and cerebellum: in the awake "
   "state these regions showed low or negative correspondence (frontal cortex -0.48, "
-  "cerebellum -0.52), which rose toward the molecular pattern under unconsciousness "
+  "cerebellum -0.52), which rose toward the molecular pattern in the sedated state "
   "(frontal cortex within-subject change 0.45, cerebellum 0.41, both p < 0.001). The "
-  "hippocampus was the only region in which correspondence decreased under "
-  "unconsciousness (change -0.10, uncorrected p = 0.037); this did not survive "
+  "hippocampus was the only region in which correspondence decreased in the "
+  "sedated state (change -0.10, uncorrected p = 0.037); this did not survive "
   "correction across regions and is not interpreted further.", after=4)
 H("3.6 Head motion does not account for the state effect")
 P("Framewise displacement was higher in the sedated state (means 0.147 awake, 0.211 "
@@ -220,7 +223,11 @@ P("To test whether the correspondence merely reflects subcortical and cortical r
   "estimation. Restricting to within-block pairs preserved a positive correspondence "
   "(illustratively, within the subcortical block r = 0.67 on a small number of pairs; the "
   "cortical block has too few regions to estimate reliably). The correspondence is "
-  "therefore architecture within blocks, not only the coarse dichotomy between them.", after=4)
+  "therefore architecture within blocks, not only the coarse dichotomy between them. "
+  "After matching inter-regional distance distributions, the cross-type correspondence "
+  "still exceeded the within-type correspondence (sedated state: cross 0.68 versus within "
+  "0.28; difference 0.40, 95% CI 0.14 to 0.56; cross exceeded within in 99.5% of 1,000 "
+  "resamples).", after=4)
 doc.add_page_break()
 
 # DISCUSSION
@@ -240,8 +247,8 @@ for t in [
  "when that variation is "
  "suppressed. The anatomical localization supports this reading: the basal ganglia "
  "express the correspondence in every state, whereas cortex and cerebellum, where "
- "awake connectivity diverges most from the molecular pattern, move toward it under "
- "unconsciousness. We frame this as an association rather than a causal or directional "
+ "awake connectivity diverges most from the molecular pattern, move toward it in the "
+ "sedated state. We frame this as an association rather than a causal or directional "
  "claim; the analysis is correlational.",
  "Methodologically, treating both scales as architectures and comparing them with a "
  "permutation test that respects the non-independence of region pairs avoids the "
