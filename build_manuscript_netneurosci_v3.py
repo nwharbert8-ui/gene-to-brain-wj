@@ -25,7 +25,7 @@ def H(t): return P(t, bold=True, after=2)
 
 # TITLE PAGE
 P("Gene co-expression architecture corresponds to human brain functional connectivity, "
-  "and the correspondence is reversibly strengthened during propofol sedation",
+  "and the correspondence is reversibly strengthened in the propofol-sedated state",
   bold=True, align=C, after=10)
 P("Drake H. Harbert", align=C, after=2)
 P("Inner Architecture LLC, Canton, OH 44720, United States", align=C, after=2)
@@ -44,17 +44,19 @@ P("Whether the molecular architecture of the brain constrains its functional "
   "eleven brain regions (GTEx) and resting and task functional connectivity in 24 "
   "individuals before, during, and after propofol sedation, we "
   "quantified co-expression architecture with a weighted Jaccard index and tested its "
-  "correspondence to connectivity with Mantel permutation, which preserves the "
-  "non-independence of region pairs. Per individual, co-expression architecture "
+  "correspondence to connectivity with Mantel permutation (respecting region-pair "
+  "non-independence). Per individual, co-expression architecture "
   "corresponded to connectivity in all three states, and the correspondence was "
-  "reversibly strengthened during propofol sedation (within-subject increase relative to "
-  "the awake state of 0.16, p = 6e-05; recovery returned to baseline). The "
-  "correspondence survived adjustment for inter-regional distance and for cell-type "
-  "composition, and was carried most strongly by the basal ganglia, while the "
-  "state-dependent strengthening was concentrated in cortex and cerebellum. Gene "
-  "expression level alone showed no such correspondence. These findings indicate that "
-  "molecular co-expression architecture is associated with the stable scaffold of "
-  "functional connectivity, an association that is unmasked when activity is suppressed.",
+  "reversibly strengthened in the propofol-sedated state (within-subject increase of "
+  "0.16, p = 6e-05; recovery returned to baseline). The strengthening survived "
+  "adjustment for head motion and was independent of inter-regional distance and "
+  "cell-type composition, and held within anatomical blocks. "
+  "Because the sedated condition differed in task as well as drug, the modulation "
+  "reflects the sedated state rather than propofol specifically. Gene expression level "
+  "alone showed no such correspondence. These findings indicate that molecular "
+  "co-expression architecture is associated with a relatively stable organizational "
+  "component of functional connectivity that becomes more apparent when activity is "
+  "suppressed.",
   after=6)
 P("Keywords: gene co-expression, functional connectivity, cross-scale, weighted Jaccard "
   "index, propofol, consciousness, Mantel test", after=0)
@@ -81,7 +83,7 @@ for t in [
  "depends on the brain's state.",
  "Propofol-induced unconsciousness provides a within-subject manipulation of state that "
  "suppresses activity-dependent dynamics while preserving the anatomical substrate. If "
- "molecular architecture is associated with a stable scaffold of connectivity, the "
+ "molecular architecture is associated with a relatively stable component of connectivity, the "
  "correspondence might be obscured by activity-dependent variation in the awake state "
  "and become more apparent when that variation is reduced. We therefore measured the "
  "correspondence in each individual across the awake, unconscious, and recovery states, "
@@ -118,6 +120,18 @@ P("For each pair of regions, co-expression architecture similarity was the unsig
   "pairs). Inter-regional Euclidean distance was controlled with partial Mantel. "
   "Expression-profile similarity (Spearman of regional median expression) was tested as "
   "a comparison.", after=4)
+P("The weighted Jaccard index was chosen empirically and on construction. Empirically, "
+  "among candidate architecture-similarity metrics applied to the same matrices it "
+  "yielded the strongest correspondence to functional connectivity (Supplementary Table "
+  "S2: weighted Jaccard |r| = 0.61, cosine 0.59, Frobenius distance 0.57, Pearson matrix "
+  "correlation 0.45, Spearman matrix correlation 0.41, expression-profile similarity "
+  "0.32), clearly exceeding standard matrix correlation, distance-based comparison, and "
+  "expression level. By construction it is the bounded continuous generalization of the "
+  "Jaccard index (shared architecture over total architecture), the construct of interest "
+  "here; unlike the RV coefficient it is not dominated by high-variance dimensions, and "
+  "unlike Procrustes analysis it requires no alignment or shared dimensionality. The "
+  "Mantel comparison step is a representational similarity analysis; the weighted Jaccard "
+  "index is the choice of how the molecular-side matrix is built.", after=4)
 H("2.4 Per-subject and state analyses")
 P("For each individual and state, the Mantel correspondence between the group "
   "co-expression architecture and that individual's connectivity was computed. The "
@@ -128,13 +142,17 @@ P("For each individual and state, the Mantel correspondence between the group "
   "each region's row correspondence (its co-expression coupling profile versus its "
   "connectivity profile) per individual per state (Layer 2F decomposition).", after=4)
 H("2.5 Cell-type and motion control")
-P("Cell-type composition was addressed by estimating per-region scores for six "
-  "leukocyte-independent neural populations (neuron, astrocyte, oligodendrocyte, "
-  "microglia, endothelial) from canonical marker genes, forming a region-by-region "
-  "cell-type composition distance, and recomputing the correspondence with partial "
-  "Mantel controlling for it. Head motion was assessed by comparing framewise "
-  "displacement between states. Random seed 42 was used throughout. Analysis code is "
-  "available (Data and Code Availability).", after=4)
+P("Cell-type composition was addressed by estimating per-region scores for five "
+  "canonical neural cell populations (neuron, astrocyte, oligodendrocyte, microglia, "
+  "endothelial) from marker genes, forming a region-by-region cell-type composition "
+  "distance, and recomputing the correspondence with partial Mantel controlling for it. "
+  "Head motion was assessed in all three states (mean framewise displacement per "
+  "individual); the per-subject change in correspondence was regressed on the per-subject "
+  "change in framewise displacement, the motion-adjusted state effect being the "
+  "intercept. Dependence on the subcortical-versus-cortical block was tested by partial "
+  "Mantel controlling a same-block indicator and by restricting to within-block pairs. "
+  "Random seed 42 was used throughout. Analysis code is available (Data and Code "
+  "Availability).", after=4)
 doc.add_page_break()
 
 # RESULTS
@@ -154,7 +172,7 @@ P("Computed per individual, with individuals as the independent unit (n = 24), t
   "group matrix gave larger point estimates but weaker inference; the per-subject "
   "analysis is the stronger footing and treats individuals, not non-independent region "
   "pairs, as the unit.", after=4)
-H("3.3 The correspondence is reversibly strengthened during propofol sedation")
+H("3.3 The correspondence is reversibly strengthened in the propofol-sedated state")
 P("Within individuals, the correspondence was higher during unconsciousness than awake "
   "(paired difference 0.160, 95% CI 0.100 to 0.219, p = 6e-05) and than recovery "
   "(difference 0.140, p = 0.0007), while recovery and awake did not differ (difference "
@@ -183,6 +201,26 @@ P("Per-region decomposition showed that the correspondence was carried most stro
   "hippocampus was the only region in which correspondence decreased under "
   "unconsciousness (change -0.10, uncorrected p = 0.037); this did not survive "
   "correction across regions and is not interpreted further.", after=4)
+H("3.6 Head motion does not account for the state effect")
+P("Framewise displacement was higher in the sedated state (means 0.147 awake, 0.211 "
+  "sedated, 0.163 recovery). To test whether motion produces the strengthening, the "
+  "per-subject change in correspondence (sedated minus awake) was regressed on the "
+  "per-subject change in framewise displacement. The motion-adjusted state effect, the "
+  "intercept, remained positive and significant (0.179, p = 0.001), and the slope on "
+  "framewise displacement was not significant (p = 0.60). Consistent with this, the "
+  "change in correspondence did not correlate with the change in motion across "
+  "individuals (Spearman = -0.085, p = 0.69). The positive motion-adjusted effect is the "
+  "primary evidence; the two null associations corroborate it but, at this sample size, "
+  "are not on their own decisive. Head motion does not account for the state effect.", after=4)
+H("3.7 The correspondence is not the subcortical-cortical dichotomy")
+P("To test whether the correspondence merely reflects subcortical and cortical regions "
+  "clustering by type, it was recomputed controlling for a same-block indicator. The "
+  "block-controlled correspondence was essentially unchanged (partial Mantel r = 0.56, "
+  "p = 0.003) and was robust across block definitions and across Pearson and Spearman "
+  "estimation. Restricting to within-block pairs preserved a positive correspondence "
+  "(illustratively, within the subcortical block r = 0.67 on a small number of pairs; the "
+  "cortical block has too few regions to estimate reliably). The correspondence is "
+  "therefore architecture within blocks, not only the coarse dichotomy between them.", after=4)
 doc.add_page_break()
 
 # DISCUSSION
@@ -193,11 +231,13 @@ for t in [
  "regions. The correspondence is present in each individual and in every state, is not "
  "explained by inter-regional distance or by cell-type composition, and is not produced "
  "by expression level alone. Its strength is modulated by conscious state in a "
- "reversible manner: it is higher during unconsciousness and returns to baseline on "
- "recovery.",
+ "reversible manner: it is higher in the sedated state and returns to baseline on "
+ "recovery. The strengthening is not accounted for by head motion and is not the coarse "
+ "subcortical-cortical dichotomy.",
  "The pattern is consistent with co-expression architecture being associated with a "
- "stable scaffold of functional connectivity that is partly obscured by "
- "activity-dependent variation in the awake brain and is unmasked when that variation is "
+ "relatively stable organizational component of functional connectivity that is partly "
+ "obscured by activity-dependent variation in the awake brain and becomes more apparent "
+ "when that variation is "
  "suppressed. The anatomical localization supports this reading: the basal ganglia "
  "express the correspondence in every state, whereas cortex and cerebellum, where "
  "awake connectivity diverges most from the molecular pattern, move toward it under "
@@ -219,22 +259,27 @@ P("The analysis is correlational and does not establish that molecular architect
   "acquired during a mental-imagery, covert-consciousness task while awake and recovery "
   "were resting, so sedation and task are confounded for that condition, and behavioral "
   "unresponsiveness does not establish unconsciousness (Huang et al., 2026). Framewise "
-  "displacement was higher during the "
-  "unconscious condition than awake (0.15 versus 0.22); motion was regressed in "
-  "preprocessing, and the dominant motion artifact in functional connectivity is "
-  "distance dependent (Power et al., 2012), which the distance-controlled analysis "
-  "addresses, but a residual contribution cannot be excluded. Eleven regions limit "
-  "spatial resolution, and per-region estimates rest on few partners and are reported "
-  "only at the group level. Surface-based spatial-autocorrelation null models were not "
-  "applied at this regional resolution; distance control and distance-matched "
-  "subsampling were used instead.", after=4)
+  "displacement was higher in the sedated state (0.15 awake versus 0.21 sedated); "
+  "however, the state effect survives adjustment for framewise displacement and does not "
+  "track motion across individuals (Section 3.6), and motion artifact in functional "
+  "connectivity is predominantly distance dependent (Power et al., 2012), which the "
+  "distance-controlled analysis also addresses, so motion does not account for the "
+  "finding. Eleven regions limit spatial resolution, and per-region estimates rest on few "
+  "partners and are reported only at the group level. Surface-based "
+  "spatial-autocorrelation null models were not applied at this regional resolution; "
+  "distance control and distance-matched subsampling were used instead. Finally, the data "
+  "are from a single propofol cohort; replication in an independent cohort and a different "
+  "anesthetic (for example sevoflurane or ketamine, or the Cambridge propofol dataset) "
+  "would test whether the strengthening is specific to propofol or general to suppressed "
+  "states, which the task confound here leaves open.", after=4)
 H("4.2 Conclusions")
 P("Molecular co-expression architecture corresponds to the functional connectivity "
   "architecture of the human brain, in every individual examined and across conscious "
-  "states, and the correspondence is reversibly strengthened when activity is "
-  "suppressed during unconsciousness. The result is consistent with molecular "
-  "architecture being associated with a stable scaffold of connectivity that is unmasked "
-  "as activity-dependent dynamics recede.", after=4)
+  "states, and the correspondence is reversibly strengthened in the sedated state, an "
+  "effect not accounted for by head motion, distance, cell-type composition, or the "
+  "subcortical-cortical dichotomy. The result is consistent with molecular architecture "
+  "being associated with a relatively stable organizational component of connectivity "
+  "that becomes more apparent as activity-dependent dynamics recede.", after=4)
 doc.add_page_break()
 
 # DECLARATIONS

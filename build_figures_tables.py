@@ -107,4 +107,24 @@ for i, rr in enumerate(rows):
         c = t.rows[i].cells[j]; c.text = ""; run = c.paragraphs[0].add_run(str(v)); run.font.size = Pt(9); run.bold = (i == 0)
 doc.save(os.path.join(TAB, "Table1.docx"))
 print("Table1 done")
-print("ALL FIGURES + TABLE WRITTEN to", OUT)
+
+# ---------- TABLE S2: architecture-similarity metric comparison (why WJ) ----------
+mc = json.load(open(os.path.join(B, "metric_comparison", "metric_comparison.json")))
+d2 = Document()
+for s in d2.sections:
+    s.top_margin = s.bottom_margin = Inches(0.8); s.left_margin = s.right_margin = Inches(0.8)
+d2.styles["Normal"].font.name = "Times New Roman"; d2.styles["Normal"].font.size = Pt(10)
+p = d2.add_paragraph(); r = p.add_run("Supplementary Table S2. Architecture-similarity metric comparison."); r.bold = True; r.font.size = Pt(11)
+p = d2.add_paragraph(); r = p.add_run("Correspondence of each candidate inter-regional architecture-similarity "
+    "metric to unconscious-state functional connectivity (|Mantel r|, Pearson-based, 10,000 permutations; and "
+    "|Spearman| of the upper-triangle vectors). Weighted Jaccard yields the strongest correspondence among "
+    "tested metrics, clearly exceeding standard matrix correlation, distance-based comparison, and expression "
+    "level. Frobenius is a distance (reported as |r|)."); r.font.size = Pt(9)
+rows = [["Metric", "|Mantel r|", "p", "|Spearman|"]] + [[x["metric"], f"{x['mantel_r']:.3f}", f"{x['mantel_p']:.4f}", f"{x['spearman']:.3f}"] for x in mc["rows"]]
+t = d2.add_table(rows=len(rows), cols=4); t.style = "Light Grid Accent 1"
+for i, rr in enumerate(rows):
+    for j, v in enumerate(rr):
+        c = t.rows[i].cells[j]; c.text = ""; run = c.paragraphs[0].add_run(str(v)); run.font.size = Pt(9); run.bold = (i == 0)
+d2.save(os.path.join(TAB, "TableS2_metric_comparison.docx"))
+print("TableS2 done")
+print("ALL FIGURES + TABLES WRITTEN to", OUT)

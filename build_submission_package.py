@@ -65,13 +65,14 @@ refdoc = """# Reference verification, gene-to-brain manuscript (Network Neurosci
 | 3 | Langfelder & Horvath (2008). WGCNA... BMC Bioinformatics 9:559 | doi:10.1186/1471-2105-9-559 | RESOLVES (canonical) |
 | 4 | Mantel, N. (1967). The detection of disease clustering... Cancer Research 27:209-220 | (no DOI; pre-DOI era) | RESOLVES (canonical) |
 | 5 | Power et al. (2012). Spurious but systematic correlations... NeuroImage 59:2142-2154 | doi:10.1016/j.neuroimage.2011.10.018 | RESOLVES (canonical) |
-| 6 | Huang, Z., et al. (2025). An open fMRI resource... covert consciousness under anesthesia. Scientific Data | doi:10.1038/s41597-025-06442-2 (OpenNeuro ds006623) | VERIFIED (web 2026-06-30). TODO: complete full author list from the paper before final submission |
+| 6 | Huang, Z., Tarnal, V., Fotiadis, P., Vlisides, P.E., Janke, E.L., Puglia, M., McKinney, A.M., Jang, H., Dai, R., Picton, P., Mashour, G.A., & Hudetz, A.G. (2026). An open fMRI resource... Scientific Data 13:127 | doi:10.1038/s41597-025-06442-2 (OpenNeuro ds006623) | VERIFIED (web 2026-06-30); full author list confirmed |
 
 ## Notes
 - This is a NEW manuscript for a new venue; a prior-version reference diff (Rule 1) does not apply.
 - No fabricated or unresolvable references. No "in press"/"submitted" citations (MIT policy satisfied).
-- Outstanding before final submission: (a) complete Huang et al. 2025 author list; (b) confirm the
-  Harbert 2026 text actually supports the WJ-method claim it is cited for; (c) mint the Zenodo DOI.
+- Outstanding before final submission: confirm the Harbert 2026 text actually supports the
+  WJ-method claim it is cited for. (Huang 2026 full author list completed; data availability
+  cites the public GitHub repo github.com/nwharbert8-ui/gene-to-brain-wj, no Zenodo DOI needed.)
 """
 open(os.path.join(OUT, "_reference_verification.md"), "w", encoding="utf-8").write(refdoc)
 
@@ -83,6 +84,10 @@ for src in [
     os.path.join(BASE, "results", "celltype_confound", "celltype_confound.json"),
     os.path.join(BASE, "results", "headmotion_check", "headmotion_check.json"),
     os.path.join(BASE, "results", "rebuild", "pairwise_metrics.csv"),
+    os.path.join(BASE, "results", "motion_battery", "motion_battery.json"),
+    os.path.join(BASE, "results", "motion_battery", "per_subject_fd_3state.csv"),
+    os.path.join(BASE, "results", "within_block", "within_block.json"),
+    os.path.join(BASE, "results", "metric_comparison", "metric_comparison.json"),
 ]:
     if os.path.exists(src):
         shutil.copy(src, os.path.join(SUP, "S_" + os.path.basename(src)))
@@ -97,7 +102,8 @@ manifest = ["# Network Neuroscience submission package, gene-to-brain (2026-06-3
             "6. Main_Figures/Fig3.pdf (distance + cell-type robustness)",
             "7. Main_Tables/Table1.docx (main results)",
             "8. Supplementary/ (per-subject, per-region, state-pairing, cell-type, motion, pairwise tables)",
-            "\nBefore submitting: complete Huang et al. 2025 author list; mint Zenodo DOI; create GitHub repo gene-to-brain-wj.",
+            "\nBefore submitting: final read-through. Author list complete; analyses pushed to "
+            "github.com/nwharbert8-ui/gene-to-brain-wj; Data Availability cites GitHub (no Zenodo needed).",
             "See _reference_verification.md for the reference check."]
 open(os.path.join(OUT, "MANIFEST.md"), "w", encoding="utf-8").write("\n".join(manifest))
 print("Submission package assembled in", OUT)
